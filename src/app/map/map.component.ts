@@ -54,6 +54,9 @@ export class MapComponent implements OnInit, OnDestroy {
     this.crossroadsService.getCrossRoadsCoordinates().subscribe((response) => this.coordinates = response);
   }
 
+  /**
+   * Set map style
+   */
   public setStyleMap(style): void {
     this.styleMap = style;
   }

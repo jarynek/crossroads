@@ -1,12 +1,16 @@
 :host {
   display: flex;
   height: 100%;
+  overflow: hidden;
+  border-top: solid;
+  border-bottom: solid;
 
   .navigation {
     padding: 16px;
     width: 200px;
     max-width: 300px;
     border-right: solid;
+    overflow-y: auto;
   }
 
   .map {

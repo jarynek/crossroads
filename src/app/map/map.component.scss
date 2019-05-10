@@ -1,4 +1,7 @@
 :host {
+
+  position: relative;
+
   .example-form {
     min-width: 150px;
     max-width: 500px;
@@ -11,6 +14,7 @@
 
   .item {
     display: none;
+
     &.visible {
       display: block;
     }
@@ -19,6 +23,23 @@
   mgl-map {
     height: 100%;
     width: 100%;
+  }
+
+  .map-filter {
+    padding: 6px 8px;
+    background: #fff;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    display: flex;
+    z-index: 1;
+    border: solid #c1bfbf 1px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.24);
+  }
+
+  mat-radio-button {
+    margin-right: 14px;
   }
 }
 
@@ -53,7 +74,7 @@
     height: 100%;
     background-color: white;
     border-radius: 15px;
-    box-shadow: 0 0 8px rgba(0,0,0,.3);
+    box-shadow: 0 0 8px rgba(0, 0, 0, .3);
     animation: pulse-dot 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -.4s infinite;
   }
 }

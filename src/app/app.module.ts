@@ -12,6 +12,7 @@ import {DetailComponent} from './detail/detail.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule, MatRadioModule} from '@angular/material';
 import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
     CrossroadsComponent,
     NavigationComponent,
     MapComponent,
-    DetailComponent
+    DetailComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

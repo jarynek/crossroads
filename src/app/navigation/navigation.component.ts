@@ -5,110 +5,149 @@ import {takeUntil, map} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
 
 interface InterfaceNavigationStatus {
-  title: string;
-  slug: string;
-  items: InterfaceCrossroads[];
+    title: string;
+    slug: string;
+    active: boolean;
+    items: InterfaceCrossroads[];
 }
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+    selector: 'app-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit, OnDestroy {
 
-  public navigation: InterfaceCrossroads[];
-  public operatingStatusNavigation: InterfaceNavigationStatus[] = [
-    {
-      title: 'Ok',
-      slug: 'Active',
-      items: []
-    },
-    {
-      title: 'Disconnect',
-      slug: 'OutOfOrder',
-      items: []
+    public navigation: InterfaceCrossroads[];
+    public operatingStatusNavigation: InterfaceNavigationStatus[] = [
+        {
+            title: 'Ok',
+            slug: 'Active',
+            active: false,
+            items: []
+        },
+        {
+            title: 'Disconnect',
+            slug: 'OutOfOrder',
+            active: false,
+            items: []
+        }
+    ];
+    private unSubscribe: Subject<string> = new Subject();
+    private sub: Subscription;
+
+    constructor(private crossroadsService: CrossroadsService) {
     }
-  ];
-  private unSubscribe: Subject<string> = new Subject();
-  private sub: Subscription;
 
-  constructor(private crossroadsService: CrossroadsService) {
-  }
+    ngOnInit() {
+        this.setNavigation();
 
-  ngOnInit() {
-    this.setNavigation();
+        this.operatingStatusNavigation.map((nav: InterfaceNavigationStatus) => {
+            nav.items = [];
+        });
+    }
 
-    this.operatingStatusNavigation.map((nav: InterfaceNavigationStatus) => {
-      nav.items = [];
-    });
-  }
+    ngOnDestroy(): void {
+        this.sub.unsubscribe();
+    }
 
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
+    /**
+     * Set crossroads map
+     */
+    private setCrossRoadsMap(ids): void {
 
-  /**
-   * Set data for navigation
-   */
-  private setNavigation(): void {
-    this.sub = this.crossroadsService.getCrossRoads()
-      .pipe(
-        takeUntil(this.unSubscribe),
-        map((response: InterfaceCrossroads[]) => {
-          if (response) {
-            response.filter((item: InterfaceCrossroads) => {
-              this.operatingStatusNavigation.filter((nav: InterfaceNavigationStatus) => {
-                if (nav.slug === item.operatingStatus) {
-                  nav.items.push(item);
-                }
-              });
+        if (!ids) {
+            throw new Error('ids not ids');
+        } else if (typeof ids !== 'object') {
+            throw new Error('ids id not object');
+        }
+
+        this.crossroadsService.getCrossRoadsMap()
+            .pipe(
+                map((response: InterfaceCrossroads[]) => {
+                    response.filter((mapItem: InterfaceCrossroads) => {
+                        mapItem.visible = ids.includes(mapItem.id);
+                    });
+                    return response;
+                })
+            )
+            .subscribe(value => console.log(value));
+    }
+
+    /**
+     * Set data for navigation
+     */
+    private setNavigation(): void {
+        this.sub = this.crossroadsService.getCrossRoads()
+            .pipe(
+                takeUntil(this.unSubscribe),
+                map((response: InterfaceCrossroads[]) => {
+                    if (response) {
+                        response.filter((item: InterfaceCrossroads) => {
+                            item.active = false;
+                            item.hidden = false;
+                            this.operatingStatusNavigation.filter((nav: InterfaceNavigationStatus) => {
+                                if (nav.slug === item.operatingStatus) {
+                                    nav.items.push(item);
+                                }
+                            });
+                        });
+                        return response;
+                    }
+                })
+            )
+            .subscribe((response: InterfaceCrossroads[]) => this.navigation = response);
+    }
+
+    /**
+     * reset Navigation
+     */
+    private resetNavigation(): void {
+        this.navigation.map((nav: InterfaceCrossroads) => nav.active = false);
+        this.operatingStatusNavigation.map((section: InterfaceNavigationStatus) => section.active = false);
+    }
+
+    /**
+     * Filtering navigation
+     */
+    public filterNavigation(item): void {
+
+        let ids = [];
+
+        if (item.items && item.items.length > 0) {
+            item.items.filter((itemId: InterfaceCrossroads) => {
+                ids.push(itemId.id);
             });
-            return response;
-          }
-        })
-      )
-      .subscribe((response: InterfaceCrossroads[]) => this.navigation = response);
-  }
+        } else {
+            ids = [item.id];
+        }
 
-  /**
-   * Filtering navigation
-   */
-  public filterNavigation(item): void {
+        try {
+            this.resetNavigation();
+            this.setCrossRoadsMap(ids);
+        } catch (e) {
+            console.log(e.message);
+        }
 
-    const ids = [item.id];
-    if (item.items) {
-      item.items.filter((itemId: InterfaceCrossroads) => {
-        console.log(itemId);
-      });
+        item.active = true;
+
+        this.crossroadsService.setCrossRoadsDetail(null);
+        if (item.position) {
+            this.crossroadsService.setCrossRoadsCoordinates(item.position.coordinates);
+        }
     }
-    console.log(ids);
-    console.log(item.items);
-    return;
 
-    this.crossroadsService.getCrossRoadsMap()
-      .pipe(
-        map((response: InterfaceCrossroads[]) => {
-          response.filter((mapItem: InterfaceCrossroads) => {
-            mapItem.visible = mapItem.id === item.id;
-          });
-        })
-      )
-      .subscribe();
-    this.crossroadsService.setCrossRoadsDetail(null);
-    // this.crossroadsService.setCrossRoadsCoordinates(item.position.coordinates);
-  }
-
-  /**
-   * Collapse all -> rebuild data
-   */
-  public collapseAll(): void {
-    this.crossroadsService.getCrossRoadsMap()
-      .pipe(
-        map((response: InterfaceCrossroads[]) => {
-          response.map((mapItem: InterfaceCrossroads) => mapItem.visible = true);
-        })
-      )
-      .subscribe();
-  }
+    /**
+     * Collapse all -> rebuild data
+     */
+    public collapseNavigation(): void {
+        this.crossroadsService.getCrossRoadsMap()
+            .pipe(
+                map((response: InterfaceCrossroads[]) => {
+                    response.map((mapItem: InterfaceCrossroads) => mapItem.visible = true);
+                })
+            )
+            .subscribe();
+        this.resetNavigation();
+    }
 }

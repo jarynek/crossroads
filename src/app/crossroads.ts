@@ -10,6 +10,8 @@ export interface Crossroads {
   managementUrl: string;
   operatingStatus: string;
   visible: boolean;
+  active: boolean;
+  hidden: boolean;
   position: {
     coordinates: InterfaceCoordinates,
     type: string;

@@ -1,10 +1,17 @@
+<app-search></app-search>
 <ul *ngIf="operatingStatusNavigation">
-    <li><span (click)="collapseAll()">Collapse All</span></li>
-    <li *ngFor="let section of operatingStatusNavigation">
-      <span class="header" (click)="filterNavigation(section)">{{section.title}}</span>
+    <li (click)="collapseNavigation()" class="item">Collapse All</li>
+    <li *ngFor="let section of operatingStatusNavigation"
+        class="section"
+        [class.active]="section.active">
+        <span class="header" (click)="filterNavigation(section)">{{section.title}}</span>
         <ul *ngIf="section.items">
-            <li *ngFor="let item of section.items">
-                <span (click)="filterNavigation(item)">{{item.name}}</span>
+            <li *ngFor="let item of section.items"
+                class="item"
+                (click)="filterNavigation(item)"
+                [class.active]="item.active"
+                [class.hidden]="item.hidden">
+                <span>{{item.name}}</span>
             </li>
         </ul>
     </li>

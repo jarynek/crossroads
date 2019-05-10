@@ -1,0 +1,18 @@
+:host {
+  .section {
+    cursor: pointer;
+  }
+  .section + .section {
+    border-top: solid;
+  }
+  .item {
+    cursor: pointer;
+    &.active {
+      text-decoration: line-through;
+      color: dodgerblue;
+    }
+    &.hidden {
+      display: none;
+    }
+  }
+}

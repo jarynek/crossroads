@@ -1,6 +1,9 @@
-<mat-radio-group aria-label="Select an option">
+
+<mat-radio-group class="map-filter" aria-label="Select an option">
   <mat-radio-button
-    *ngFor="let style of stylesMap" [value]="style" (click)="setStyleMap(style)">{{style}}</mat-radio-button>
+          *ngFor="let style of stylesMap"
+          [value]="style"
+          (click)="setStyleMap(style)">{{style}}</mat-radio-button>
 </mat-radio-group>
 
 <mgl-map *ngIf="map"
