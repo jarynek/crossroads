@@ -1,5 +1,5 @@
 <ul *ngIf="navigation">
-    <li *ngFor="let item of navigation">{{item.name}}</li>
+    <li *ngFor="let item of navigation"><span (click)="filterNavigation(item)">{{item.name}}</span></li>
 </ul>
 
 <ul *ngIf="operatingStatusNavigation">
