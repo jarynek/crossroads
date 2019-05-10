@@ -1,0 +1,8 @@
+:host {
+  .item {
+    display: none;
+    &.visible {
+      display: block;
+    }
+  }
+}

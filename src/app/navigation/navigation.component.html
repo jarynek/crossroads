@@ -1,0 +1,14 @@
+<ul *ngIf="navigation">
+    <li *ngFor="let item of navigation">{{item.name}}</li>
+</ul>
+
+<ul *ngIf="operatingStatusNavigation">
+    <li><span (click)="collapseAll()">Collapse All</span></li>
+    <li *ngFor="let section of operatingStatusNavigation">{{section.slug}}
+        <ul *ngIf="section.items">
+            <li *ngFor="let item of section.items">
+                <span (click)="filterNavigation(item)">{{item.name}}</span>
+            </li>
+        </ul>
+    </li>
+</ul>

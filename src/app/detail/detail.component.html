@@ -1,0 +1,5 @@
+<form action="" *ngIf="detail">
+    <h2>{{detail.name}}</h2>
+    <input type="text" name="name" [(ngModel)]="detail.name" (ngModelChange)="setNavigation()">
+    <input type="text" name="status" [(ngModel)]="detail.operatingStatus">
+</form>

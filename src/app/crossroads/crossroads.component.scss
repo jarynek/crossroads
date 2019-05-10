@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+
+  .navigation {
+    padding: 16px;
+    width: 200px;
+    max-width: 300px;
+    border-right: solid;
+  }
+
+  .map {
+    flex-grow:2
+  }
+
+  .detail {
+    padding: 16px;
+    width: 200px;
+    max-width: 300px;
+    border-left: solid;
+  }
+}
