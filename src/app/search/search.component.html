@@ -1,0 +1,6 @@
+<form action="">
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Hledej" (keyup)="search($event)" name="search">
+        <span *ngIf="reset" (click)="resetSearch()">reset</span>
+    </mat-form-field>
+</form>
