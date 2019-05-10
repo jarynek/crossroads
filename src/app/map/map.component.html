@@ -1,8 +1,15 @@
-<ul *ngIf="map">
-  <li *ngFor="let point of map" class="item" [class.visible]="point.visible">
-  <span (click)="filterDetail(point)">{{point.name}}</span>
-    <ul>
-      <li *ngIf="point.position">{{point.position.coordinates[0]}}, {{point.position.coordinates[1]}}</li>
-    </ul>
-  </li>
-</ul>
+<mgl-map *ngIf="map"
+         [style]="'mapbox://styles/mapbox/streets-v9'"
+         [zoom]="[9]"
+         [center]="[-74.50, 40]"
+>
+  <ng-container *ngFor="let point of map">
+    <mgl-marker
+      *ngIf="point.position"
+      [lngLat]="[point.position.coordinates[0], point.position.coordinates[1]]">
+      <span class="item pulsating-circle"
+            [class.visible]="point.visible"
+            (click)="filterDetail(point)"></span>
+    </mgl-marker>
+  </ng-container>
+</mgl-map>

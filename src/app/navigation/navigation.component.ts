@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CrossroadsService} from '../crossroads.service';
 import {Crossroads as InterfaceCrossroads} from '../crossroads';
-import {takeUntil, map} from 'rxjs/operators';
+import {takeUntil, map, tap} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
+import {error} from 'util';
 
 interface InterfaceNavigationStatus {
   title: string;
