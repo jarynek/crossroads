@@ -75,6 +75,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
    * Filtering navigation
    */
   public filterNavigation(item): void {
+
+    const ids = [item.id];
+    if (item.items) {
+      item.items.filter((itemId: InterfaceCrossroads) => {
+        console.log(itemId);
+      });
+    }
+    console.log(ids);
+    console.log(item.items);
+    return;
+
     this.crossroadsService.getCrossRoadsMap()
       .pipe(
         map((response: InterfaceCrossroads[]) => {
@@ -85,7 +96,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
       )
       .subscribe();
     this.crossroadsService.setCrossRoadsDetail(null);
-    this.crossroadsService.setCrossRoadsCoordinates(item.position.coordinates);
+    // this.crossroadsService.setCrossRoadsCoordinates(item.position.coordinates);
   }
 
   /**
