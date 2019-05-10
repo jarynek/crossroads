@@ -48,6 +48,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
      * Set data for navigation
      */
     private setNavigation(): void {
+
+        this.crossroadsService.getCrossRoads().subscribe((response: InterfaceCrossroads[]) => this.navigation = response);
         this.sub = this.crossroadsService.getCrossRoads()
             .pipe(
                 takeUntil(this.unSubscribe),
