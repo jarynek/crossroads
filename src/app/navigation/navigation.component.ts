@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CrossroadsService} from '../crossroads.service';
 import {Crossroads as InterfaceCrossroads} from '../crossroads';
-import {takeUntil, map, tap} from 'rxjs/operators';
+import {takeUntil, map} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
-import {error} from 'util';
 
 interface InterfaceNavigationStatus {
   title: string;
@@ -18,6 +17,7 @@ interface InterfaceNavigationStatus {
 })
 export class NavigationComponent implements OnInit, OnDestroy {
 
+  public navigation: InterfaceCrossroads[];
   public operatingStatusNavigation: InterfaceNavigationStatus[] = [
     {
       title: 'Ok',
@@ -64,14 +64,15 @@ export class NavigationComponent implements OnInit, OnDestroy {
                 }
               });
             });
+            return response;
           }
         })
       )
-      .subscribe();
+      .subscribe((response: InterfaceCrossroads[]) => this.navigation = response);
   }
 
   /**
-   * Filter navigation
+   * Filtering navigation
    */
   public filterNavigation(item): void {
     this.crossroadsService.getCrossRoadsMap()
@@ -84,6 +85,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
       )
       .subscribe();
     this.crossroadsService.setCrossRoadsDetail(null);
+    this.crossroadsService.setCrossRoadsCoordinates(item.position.coordinates);
   }
 
   /**

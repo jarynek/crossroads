@@ -10,7 +10,7 @@ import {NavigationComponent} from './navigation/navigation.component';
 import {MapComponent} from './map/map.component';
 import {DetailComponent} from './detail/detail.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule, MatRadioModule} from '@angular/material';
 import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
 
 @NgModule({
@@ -31,6 +31,7 @@ import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
     MatCheckboxModule,
     MatInputModule,
     MatIconModule,
+    MatRadioModule,
     NgxMapboxGLModule.withConfig({
       accessToken: 'pk.eyJ1Ijoibm92bzMyIiwiYSI6ImNpcnJneWFncTAwZDRocW0xbXc1bms4enkifQ.LPu4CnsewasKfUdARljoSw',
       geocoderAccessToken: 'pk.eyJ1Ijoibm92bzMyIiwiYSI6ImNpcnJneWFncTAwZDRocW0xbXc1bms4enkifQ.LPu4CnsewasKfUdARljoSw'

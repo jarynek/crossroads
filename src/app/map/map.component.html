@@ -1,7 +1,12 @@
+<mat-radio-group aria-label="Select an option">
+  <mat-radio-button
+    *ngFor="let style of stylesMap" [value]="style" (click)="setStyleMap(style)">{{style}}</mat-radio-button>
+</mat-radio-group>
+
 <mgl-map *ngIf="map"
-         [style]="'mapbox://styles/mapbox/streets-v9'"
-         [zoom]="[9]"
-         [center]="[-74.50, 40]"
+         [style]="'mapbox://styles/mapbox/' + styleMap + '-v9'"
+         [zoom]="[14]"
+         [center]="coordinates"
 >
   <ng-container *ngFor="let point of map">
     <mgl-marker
@@ -12,4 +17,7 @@
             (click)="filterDetail(point)"></span>
     </mgl-marker>
   </ng-container>
+  <mgl-control
+    mglNavigation
+  ></mgl-control>
 </mgl-map>

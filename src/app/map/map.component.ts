@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Crossroads as InterfaceCrossroads} from '../crossroads';
 import {CrossroadsService} from '../crossroads.service';
 import {Subject} from 'rxjs';
@@ -9,9 +9,12 @@ import {map, takeUntil} from 'rxjs/operators';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
 
   public map: InterfaceCrossroads[];
+  public coordinates;
+  public styleMap = 'basic';
+  private stylesMap = ['basic', 'streets', 'bright', 'light', 'dark', 'satellite'];
   private unSubscribe: Subject<string> = new Subject();
 
   constructor(private crossroadsService: CrossroadsService) {
@@ -19,6 +22,10 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.initMapData();
+    this.setCoordinates();
+  }
+
+  ngOnDestroy(): void {
   }
 
   /**
@@ -38,6 +45,17 @@ export class MapComponent implements OnInit {
       .subscribe((response: InterfaceCrossroads[]) => {
         this.map = response;
       });
+  }
+
+  /***
+   * Set coordinates
+   */
+  private setCoordinates() {
+    this.crossroadsService.getCrossRoadsCoordinates().subscribe((response) => this.coordinates = response);
+  }
+
+  public setStyleMap(style): void {
+    this.styleMap = style;
   }
 
   /**
