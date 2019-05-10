@@ -9,23 +9,30 @@ import {CrossroadsComponent} from './crossroads/crossroads.component';
 import {NavigationComponent} from './navigation/navigation.component';
 import {MapComponent} from './map/map.component';
 import {DetailComponent} from './detail/detail.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule} from '@angular/material';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        CrossroadsComponent,
-        NavigationComponent,
-        MapComponent,
-        DetailComponent
-    ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        FormsModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    CrossroadsComponent,
+    NavigationComponent,
+    MapComponent,
+    DetailComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatInputModule,
+    MatIconModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

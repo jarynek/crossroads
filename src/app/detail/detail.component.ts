@@ -29,12 +29,4 @@ export class DetailComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.sub.unsubscribe();
     }
-
-    public setNavigation(): void {
-        this.crossroadsService.getCrossRoadsMap()
-            .subscribe((response: InterfaceCrossroads[]) => {
-                this.crossroadsService.setCrossRoads(response);
-            });
-    }
-
 }

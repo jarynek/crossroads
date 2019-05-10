@@ -1,5 +1,8 @@
 <ul *ngIf="map">
   <li *ngFor="let point of map" class="item" [class.visible]="point.visible">
-    <span (click)="filterDetail(point)">{{point.name}}</span>
+  <span (click)="filterDetail(point)">{{point.name}}</span>
+    <ul>
+      <li *ngIf="point.position">{{point.position.coordinates[0]}}, {{point.position.coordinates[1]}}</li>
+    </ul>
   </li>
 </ul>

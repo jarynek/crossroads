@@ -1,5 +1,19 @@
 <form action="" *ngIf="detail">
-    <h2>{{detail.name}}</h2>
-    <input type="text" name="name" [(ngModel)]="detail.name" (ngModelChange)="setNavigation()">
-    <input type="text" name="status" [(ngModel)]="detail.operatingStatus">
+  <h2>{{detail.name}}</h2>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Name" name="name" [value]="detail.name" [(ngModel)]="detail.name">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="OperatingStatus" name="operatingStatus" [value]="detail.operatingStatus" [(ngModel)]="detail.operatingStatus">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Coordinates 0" name="coordinates_0" [value]="detail.position.coordinates[0]" [(ngModel)]="detail.position.coordinates[0]">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Coordinates 1" name="coordinates_1" [value]="detail.position.coordinates[1]" [(ngModel)]="detail.position.coordinates[1]">
+  </mat-form-field>
 </form>
