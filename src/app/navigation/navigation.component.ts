@@ -116,7 +116,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
             throw new Error('not navigationTree');
         }
 
-        this.navigation.map((nav: InterfaceCrossroads) => nav.active = false);
+        this.navigation.map((nav: InterfaceCrossroads) => {
+            nav.active = false;
+            nav.hidden = false;
+        });
         this.navigationTree.map((section: InterfaceNavigationStatus) => section.active = false);
     }
 
@@ -162,5 +165,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
             )
             .subscribe();
         this.resetNavigation();
+        this.crossroadsService.setCrossRoadsCoordinates([19.0580278, 52.65725]);
     }
 }

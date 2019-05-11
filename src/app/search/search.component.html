@@ -1,6 +1,6 @@
 <form action="">
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Hledej" (keyup)="search($event)" name="search">
-        <span *ngIf="reset" (click)="resetSearch()">reset</span>
+        <input matInput placeholder="Search" id="search" (keyup)="search($event)" name="query" [(ngModel)]="query">
+        <span *ngIf="reset" class="material-icons" (click)="resetSearch($event)">clear</span>
     </mat-form-field>
 </form>

@@ -11,11 +11,13 @@ import {takeUntil} from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit, OnDestroy {
 
-    private navigate: InterfaceCrossroads[];
-    private map: InterfaceCrossroads[];
+    private _navigate: InterfaceCrossroads[];
+    private _map: InterfaceCrossroads[];
+    private _filterMapPoints;
     private unSubscribe: Subject<string> = new Subject();
     private sub: Subscription;
     public reset: boolean;
+    public query: string;
 
     constructor(private crossroadsService: CrossroadsService) {
     }
@@ -37,7 +39,11 @@ export class SearchComponent implements OnInit, OnDestroy {
             .pipe(
                 takeUntil(this.unSubscribe)
             )
-            .subscribe((response: InterfaceCrossroads[]) => this.navigate = response);
+            .subscribe((response: InterfaceCrossroads[]) => this._navigate = response);
+    }
+
+    private resetNavigate(): void {
+        this._navigate.map((item: InterfaceCrossroads) => item.hidden = false);
     }
 
     /**
@@ -48,14 +54,19 @@ export class SearchComponent implements OnInit, OnDestroy {
             .pipe(
                 takeUntil(this.unSubscribe)
             )
-            .subscribe((response: InterfaceCrossroads[]) => this.map = response);
+            .subscribe((response: InterfaceCrossroads[]) => this._map = response);
+    }
+
+    private resetMap(): void {
+        this._map.map((item: InterfaceCrossroads) => item.visible = true);
+        this.crossroadsService.setCrossRoadsCoordinates([19.0580278, 52.65725]);
     }
 
     /**
      * Filtering navigation (to service)
      */
     private filterNavigation(value: string): void {
-        this.navigate.filter((nav: InterfaceCrossroads) => {
+        this._navigate.filter((nav: InterfaceCrossroads) => {
             nav.hidden = !nav.name.toLocaleLowerCase().includes(value.toLocaleLowerCase());
         });
     }
@@ -64,9 +75,24 @@ export class SearchComponent implements OnInit, OnDestroy {
      * Filtering navigation (to service)
      */
     private filterMap(value: string): void {
-        this.map.filter((nav: InterfaceCrossroads) => {
-            nav.visible = !!nav.name.toLocaleLowerCase().includes(value.toLocaleLowerCase());
+        this._filterMapPoints = [];
+        this._map.filter((nav: InterfaceCrossroads) => {
+            nav.visible = true;
+            if (!nav.name.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
+                nav.visible = false;
+            } else {
+                if (nav.position) {
+                    this._filterMapPoints.push(nav.position.coordinates);
+                }
+            }
         });
+    }
+
+    /**
+     * Set coordinates
+     */
+    private setCoordinates(filterMapPoints: InterfaceCrossroads[]) {
+        this.crossroadsService.setCrossRoadsCoordinates(filterMapPoints[0]);
     }
 
     /**
@@ -78,11 +104,23 @@ export class SearchComponent implements OnInit, OnDestroy {
         if (value) {
             this.reset = true;
         }
-        this.filterNavigation(value);
-        this.filterMap(value);
+
+        try {
+            this.filterNavigation(value);
+            this.filterMap(value);
+            this.setCoordinates(this._filterMapPoints);
+        } catch (e) {
+            console.log(e.message);
+        }
     }
 
-    public resetSearch(): void {
-        console.log('resetSearch');
+    /**
+     * Reset search
+     */
+    public resetSearch(event: MouseEvent): void {
+        this.resetNavigate();
+        this.resetMap();
+        this.query = '';
+        this.reset = false;
     }
 }

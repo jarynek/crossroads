@@ -36,6 +36,9 @@ export class CrossroadsComponent implements OnInit, OnDestroy {
         takeUntil(this.unSubscribe)
       )
       .subscribe((response: InterfaceCrossroads[]) => {
+
+        console.log(response);
+
         this.crossroadsService.setCrossRoads(response);
         this.crossroadsService.setCrossRoadsMap(response);
       });
