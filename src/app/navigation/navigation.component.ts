@@ -19,7 +19,7 @@ interface InterfaceNavigationStatus {
 export class NavigationComponent implements OnInit, OnDestroy {
 
     public navigation: InterfaceCrossroads[];
-    public operatingStatusNavigation: InterfaceNavigationStatus[] = [
+    public navigationTree: InterfaceNavigationStatus[] = [
         {
             title: 'Ok',
             slug: 'Active',
@@ -41,8 +41,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.setNavigation();
-
-        this.operatingStatusNavigation.map((nav: InterfaceNavigationStatus) => {
+        this.navigationTree.map((nav: InterfaceNavigationStatus) => {
             nav.items = [];
         });
     }
@@ -75,36 +74,50 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Set data for navigation
+     * Get navigation (to service)
      */
     private setNavigation(): void {
         this.sub = this.crossroadsService.getCrossRoads()
             .pipe(
-                takeUntil(this.unSubscribe),
-                map((response: InterfaceCrossroads[]) => {
-                    if (response) {
-                        response.filter((item: InterfaceCrossroads) => {
-                            item.active = false;
-                            item.hidden = false;
-                            this.operatingStatusNavigation.filter((nav: InterfaceNavigationStatus) => {
-                                if (nav.slug === item.operatingStatus) {
-                                    nav.items.push(item);
-                                }
-                            });
-                        });
-                        return response;
-                    }
-                })
+                takeUntil(this.unSubscribe)
             )
-            .subscribe((response: InterfaceCrossroads[]) => this.navigation = response);
+            .subscribe((response: InterfaceCrossroads[]) => {
+                if (response) {
+                    this.navigation = response;
+                    this.setNavigationTree(this.navigation);
+                }
+
+            });
     }
 
     /**
-     * reset Navigation
+     * Set navigation tree
+     */
+    private setNavigationTree(response: InterfaceCrossroads[]): void {
+        response.map((item: InterfaceCrossroads) => {
+            item.active = false;
+            item.hidden = false;
+            this.navigationTree.filter((nav: InterfaceNavigationStatus) => {
+                if (nav.slug === item.operatingStatus) {
+                    nav.items.push(item);
+                }
+            });
+        });
+    }
+
+    /**
+     * Reset Navigation
      */
     private resetNavigation(): void {
+
+        if (!this.navigation) {
+            throw new Error('not navigation');
+        } else if (!this.navigationTree) {
+            throw new Error('not navigationTree');
+        }
+
         this.navigation.map((nav: InterfaceCrossroads) => nav.active = false);
-        this.operatingStatusNavigation.map((section: InterfaceNavigationStatus) => section.active = false);
+        this.navigationTree.map((section: InterfaceNavigationStatus) => section.active = false);
     }
 
     /**
@@ -138,7 +151,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }
 
     /**
-     * Collapse all -> rebuild data
+     * Collapse all
      */
     public collapseNavigation(): void {
         this.crossroadsService.getCrossRoadsMap()

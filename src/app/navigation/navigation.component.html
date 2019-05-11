@@ -1,7 +1,7 @@
 <app-search></app-search>
-<ul *ngIf="operatingStatusNavigation">
+<ul *ngIf="navigationTree">
     <li (click)="collapseNavigation()" class="item">Collapse All</li>
-    <li *ngFor="let section of operatingStatusNavigation"
+    <li *ngFor="let section of navigationTree"
         class="section"
         [class.active]="section.active">
         <span class="header" (click)="filterNavigation(section)">{{section.title}}</span>
