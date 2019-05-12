@@ -3,8 +3,10 @@
     <li (click)="collapseNavigation()" class="item">Collapse All</li>
     <li *ngFor="let section of navigationTree"
         class="section"
+        [ngClass]="section.slug"
         [class.active]="section.active">
         <span class="header" (click)="filterNavigation(section)">{{section.title}} {{section.items.length}}</span>
+        <span *ngIf="section.items.length > 0" class="opener">open</span>
         <ul *ngIf="section.items">
             <li *ngFor="let item of section.items"
                 class="item"

@@ -89,18 +89,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
      * Get navigation (to service)
      */
     private setNavigation(): void {
-        const status = ['ok', 'warning', 'error', 'disconnected'];
         this.sub = this.crossroadsService.getCrossRoads()
             .pipe(
                 takeUntil(this.unSubscribe),
-                map((response: InterfaceCrossroads[]) => {
-                    if (response) {
-                        response.map((nav: InterfaceCrossroads) => {
-                            nav.systemStatus = status[Math.floor(Math.random() * status.length)];
-                        });
-                    }
-                    return response;
-                })
             )
             .subscribe((response: InterfaceCrossroads[]) => {
                 if (response) {

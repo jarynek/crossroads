@@ -3,7 +3,7 @@ import {RestApiService} from '../rest-api.service';
 import {CrossroadsService} from '../crossroads.service';
 import {Crossroads as InterfaceCrossroads} from '../crossroads';
 import {Subject, Subscription} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {map, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-crossroads',
@@ -31,9 +31,18 @@ export class CrossroadsComponent implements OnInit, OnDestroy {
    * Init rest Api crossroads data for navigate, map
    */
   private initRestApiData(): void {
+    const status = ['ok', 'warning', 'error', 'disconnected'];
     this.subInitRestData = this.restApi.apiCrossRoads()
       .pipe(
-        takeUntil(this.unSubscribe)
+        takeUntil(this.unSubscribe),
+          map((response: InterfaceCrossroads[]) => {
+            if (response) {
+              response.map((nav: InterfaceCrossroads) => {
+                nav.systemStatus = status[Math.floor(Math.random() * status.length)];
+              });
+            }
+            return response;
+          })
       )
       .subscribe((response: InterfaceCrossroads[]) => {
         this.crossroadsService.setCrossRoads(response);

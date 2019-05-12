@@ -4,9 +4,69 @@
     list-style: none;
     padding: 0;
 
+    ul {
+      list-style: none;
+    }
+
     .section {
       cursor: pointer;
       padding: 10px 0;
+
+      &.active {
+        & > .header {
+          text-decoration: line-through;
+          color: #45bb42;
+        }
+      }
+
+      &.ok {
+        .header {
+          &:before {
+            background: #44d115;
+          }
+        }
+      }
+
+      &.warning {
+        .header {
+          &:before {
+            background: #ffae00;
+          }
+        }
+      }
+
+      &.error {
+        .header {
+          &:before {
+            background: #f20000;
+          }
+        }
+      }
+
+      &.disconnected {
+        .header {
+          &:before {
+            background: #963d94;
+          }
+        }
+      }
+
+      .header {
+        position: relative;
+        padding-left: 24px;
+        display: inline-block;
+
+        &:before {
+          position: absolute;
+          content: '';
+          width: 20px;
+          height: 20px;
+          background: red;
+          display: block;
+          left: 0;
+          top:-1px;
+        }
+      }
     }
 
     .section + .section {
@@ -24,10 +84,6 @@
       &.hidden {
         display: none;
       }
-    }
-
-    ul {
-      list-style: none;
     }
   }
 }
