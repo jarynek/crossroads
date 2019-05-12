@@ -9,6 +9,7 @@ export interface Crossroads {
   producer: string;
   managementUrl: string;
   operatingStatus: string;
+  systemStatus: string;
   visible: boolean;
   active: boolean;
   hidden: boolean;

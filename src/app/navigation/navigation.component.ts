@@ -22,13 +22,25 @@ export class NavigationComponent implements OnInit, OnDestroy {
     public navigationTree: InterfaceNavigationStatus[] = [
         {
             title: 'Ok',
-            slug: 'Active',
+            slug: 'ok',
             active: false,
             items: []
         },
         {
-            title: 'Disconnect',
-            slug: 'OutOfOrder',
+            title: 'Disconnected',
+            slug: 'disconnected',
+            active: false,
+            items: []
+        },
+        {
+            title: 'Warning',
+            slug: 'warning',
+            active: false,
+            items: []
+        },
+        {
+            title: 'Error',
+            slug: 'error',
             active: false,
             items: []
         }
@@ -77,16 +89,24 @@ export class NavigationComponent implements OnInit, OnDestroy {
      * Get navigation (to service)
      */
     private setNavigation(): void {
+        const status = ['ok', 'warning', 'error', 'disconnected'];
         this.sub = this.crossroadsService.getCrossRoads()
             .pipe(
-                takeUntil(this.unSubscribe)
+                takeUntil(this.unSubscribe),
+                map((response: InterfaceCrossroads[]) => {
+                    if (response) {
+                        response.map((nav: InterfaceCrossroads) => {
+                            nav.systemStatus = status[Math.floor(Math.random() * status.length)];
+                        });
+                    }
+                    return response;
+                })
             )
             .subscribe((response: InterfaceCrossroads[]) => {
                 if (response) {
                     this.navigation = response;
                     this.setNavigationTree(this.navigation);
                 }
-
             });
     }
 
@@ -98,7 +118,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
             item.active = false;
             item.hidden = false;
             this.navigationTree.filter((nav: InterfaceNavigationStatus) => {
-                if (nav.slug === item.operatingStatus) {
+                if (nav.slug === item.systemStatus) {
                     nav.items.push(item);
                 }
             });

@@ -1,18 +1,33 @@
 :host {
-  .section {
-    cursor: pointer;
-  }
-  .section + .section {
-    border-top: solid;
-  }
-  .item {
-    cursor: pointer;
-    &.active {
-      text-decoration: line-through;
-      color: dodgerblue;
+  .navigation {
+
+    list-style: none;
+    padding: 0;
+
+    .section {
+      cursor: pointer;
+      padding: 10px 0;
     }
-    &.hidden {
-      display: none;
+
+    .section + .section {
+      border-top: solid 1px #dcdcdc;
+    }
+
+    .item {
+      cursor: pointer;
+
+      &.active {
+        text-decoration: line-through;
+        color: #45bb42;
+      }
+
+      &.hidden {
+        display: none;
+      }
+    }
+
+    ul {
+      list-style: none;
     }
   }
 }

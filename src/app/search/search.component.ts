@@ -43,7 +43,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     private resetNavigate(): void {
-        this._navigate.map((item: InterfaceCrossroads) => item.hidden = false);
+        this._navigate.map((item: InterfaceCrossroads) => {
+            item.hidden = false;
+            item.active = false;
+        });
     }
 
     /**
@@ -57,6 +60,9 @@ export class SearchComponent implements OnInit, OnDestroy {
             .subscribe((response: InterfaceCrossroads[]) => this._map = response);
     }
 
+    /**
+     * Reset map
+     */
     private resetMap(): void {
         this._map.map((item: InterfaceCrossroads) => item.visible = true);
         this.crossroadsService.setCrossRoadsCoordinates([19.0580278, 52.65725]);
@@ -89,6 +95,13 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     /**
+     * Reset detail
+     */
+    private resetDetail(): void {
+        this.crossroadsService.setCrossRoadsDetail(null);
+    }
+
+    /**
      * Set coordinates
      */
     private setCoordinates(filterMapPoints: InterfaceCrossroads[]) {
@@ -109,6 +122,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             this.filterNavigation(value);
             this.filterMap(value);
             this.setCoordinates(this._filterMapPoints);
+            this.resetDetail();
         } catch (e) {
             console.log(e.message);
         }
@@ -117,9 +131,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     /**
      * Reset search
      */
-    public resetSearch(event: MouseEvent): void {
+    public resetSearch(): void {
         this.resetNavigate();
         this.resetMap();
+        this.resetDetail();
         this.query = '';
         this.reset = false;
     }

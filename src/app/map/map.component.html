@@ -1,26 +1,28 @@
-
-<mat-radio-group class="map-filter" aria-label="Select an option">
-  <mat-radio-button
-          *ngFor="let style of stylesMap"
-          [value]="style"
-          (click)="setStyleMap(style)">{{style}}</mat-radio-button>
-</mat-radio-group>
-
-<mgl-map *ngIf="map"
-         [style]="'mapbox://styles/mapbox/' + styleMap + '-v9'"
-         [zoom]="[14]"
-         [center]="coordinates"
->
-  <ng-container *ngFor="let point of map">
-    <mgl-marker
-      *ngIf="point.position"
-      [lngLat]="[point.position.coordinates[0], point.position.coordinates[1]]">
+<ng-container *ngIf="!map">Map</ng-container>
+<ng-container *ngIf="map">
+  <mat-radio-group class="map-filter" aria-label="Select an option">
+    <mat-radio-button
+            *ngFor="let style of stylesMap"
+            [value]="style"
+            (click)="setStyleMap(style)">{{style}}</mat-radio-button>
+  </mat-radio-group>
+  <mgl-map *ngIf="map"
+           [style]="'mapbox://styles/mapbox/' + styleMap + '-v9'"
+           [zoom]="[14]"
+           [center]="coordinates"
+  >
+    <ng-container *ngFor="let point of map">
+      <mgl-marker
+              *ngIf="point.position"
+              [lngLat]="[point.position.coordinates[0], point.position.coordinates[1]]">
       <span class="item pulsating-circle"
             [class.visible]="point.visible"
+            [class.active]="point.active"
             (click)="filterDetail(point)"></span>
-    </mgl-marker>
-  </ng-container>
-  <mgl-control
-    mglNavigation
-  ></mgl-control>
-</mgl-map>
+      </mgl-marker>
+    </ng-container>
+    <mgl-control
+            mglNavigation
+    ></mgl-control>
+  </mgl-map>
+</ng-container>
