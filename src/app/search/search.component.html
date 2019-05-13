@@ -1,6 +1,6 @@
 <form action="">
     <mat-form-field class="example-full-width">
         <input matInput placeholder="Search" id="search" (keyup)="search($event)" name="query" [(ngModel)]="query">
-        <span *ngIf="reset" class="material-icons" (click)="resetSearch()">clear</span>
+        <span *ngIf="reset" class="material-icons reset" (click)="resetSearch()">clear</span>
     </mat-form-field>
 </form>

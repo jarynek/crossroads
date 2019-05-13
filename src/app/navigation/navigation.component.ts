@@ -53,7 +53,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
           return response;
         })
       )
-      .subscribe(value => console.log(value));
+      .subscribe();
   }
 
   /**
@@ -85,7 +85,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
         }
       });
     });
-
     this.crossroadsService.setCrossRoadsTree(this.navigationTree);
   }
 

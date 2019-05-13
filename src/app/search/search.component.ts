@@ -132,6 +132,8 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.reset = true;
     }
 
+    this._tree.map((tree: InterfaceTree) => tree.open = false);
+
     try {
       this.filterNavigation(value);
       this.filterMap(value);

@@ -1,0 +1,33 @@
+:host {
+  h2 {
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  label {
+    color: #fff;
+    display: inline-block;
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    &.ok {
+      background-color: #44d115;
+    }
+
+    &.warning {
+      background-color: #ffae00;
+    }
+
+    &.error {
+      background-color: #f20000;
+    }
+
+    &.disconnected {
+      background-color: #b81d8f;
+    }
+  }
+
+  .mat-form-field {
+    display: block;
+  }
+}

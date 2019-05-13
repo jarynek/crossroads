@@ -9,10 +9,7 @@
       [class.open]="section.open">
     <span class="header" (click)="filterNavigation(section)">{{section.title}} ({{section.items.length}})</span>
     <span *ngIf="section.items.length > 0"
-          class="material-icons opener"
-          appToggleSection
-          (updateCollapseInit)="collapseSetInit($event)"
-          [section]="section">{{section.open ? 'arrow_drop_down' : 'arrow_right'}}</span>
+          class="material-icons opener">{{section.open ? 'arrow_drop_down' : 'arrow_right'}}</span>
     <ul *ngIf="section.items">
       <li *ngFor="let item of section.items"
           class="item"

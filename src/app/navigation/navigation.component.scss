@@ -14,8 +14,8 @@
       padding: 10px 0;
 
       ul {
-        display: none;
-        padding: 10px 10px 0 30px;
+        padding: 0 10px 0 20px;
+        // display: none;
         li {
           padding: 4px 0 4px 24px;
           position: relative;
@@ -23,7 +23,10 @@
             content: '';
             height: 20px;
             width: 20px;
-            background: url("../../assets/images/icon-cctv1.png") #963d94 center no-repeat;
+            background-image: url("../../assets/images/icon-cctv1.png");
+            background-color: #5087c2;
+            background-position: center;
+            background-repeat: no-repeat;
             background-size: 70%;
             display: block;
             position: absolute;
@@ -39,20 +42,28 @@
       &.open {
         ul {
           display: block;
+          margin-top: 10px;
         }
       }
 
       &.active {
         & > .header {
           text-decoration: line-through;
-          color: #45bb42;
+          color: #000;
         }
       }
 
       &.ok {
         .header {
           &:before {
-            background: #44d115;
+            background: url("../../assets/images/icon-ok-full.png") transparent center no-repeat;
+          }
+        }
+        ul {
+          li {
+            &:before {
+              background-color: #44d115;
+            }
           }
         }
       }
@@ -60,7 +71,14 @@
       &.warning {
         .header {
           &:before {
-            background: #ffae00;
+            background: url("../../assets/images/icon-warn-full.png") transparent center no-repeat;
+          }
+        }
+        ul {
+          li {
+            &:before {
+              background-color: #ffae00;
+            }
           }
         }
       }
@@ -68,7 +86,14 @@
       &.error {
         .header {
           &:before {
-            background: #f20000;
+            background: url("../../assets/images/icon-error-full.png") transparent center no-repeat;
+          }
+        }
+        ul {
+          li {
+            &:before {
+              background-color: #f20000;
+            }
           }
         }
       }
@@ -76,7 +101,14 @@
       &.disconnected {
         .header {
           &:before {
-            background: #963d94;
+            background: url("../../assets/images/icon-disconnected-full.png") transparent center no-repeat;
+          }
+        }
+        ul {
+          li {
+            &:before {
+              background-color: #b81d8f;
+            }
           }
         }
       }
@@ -116,7 +148,7 @@
 
       &.active {
         text-decoration: line-through;
-        color: #45bb42;
+        color: #000;
       }
 
       &.hidden {

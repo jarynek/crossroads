@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Crossroads as InterfaceCrossroads} from '../crossroads';
+import {NavigationTree as InterfaceTree} from '../navigation-tree';
 import {CrossroadsService} from '../crossroads.service';
 import {Subject, Subscription} from 'rxjs';
 import {takeUntil, map} from 'rxjs/operators';
@@ -12,7 +13,9 @@ import {takeUntil, map} from 'rxjs/operators';
 export class DetailComponent implements OnInit, OnDestroy {
 
     public detail: InterfaceCrossroads;
+    private _tree: InterfaceTree[];
     private unSubscribe: Subject<string> = new Subject();
+    private subNav: Subscription;
     private sub: Subscription;
 
     constructor(private crossroadsService: CrossroadsService) {
@@ -24,9 +27,22 @@ export class DetailComponent implements OnInit, OnDestroy {
                 takeUntil(this.unSubscribe)
             )
             .subscribe((response: InterfaceCrossroads) => this.detail = response);
+
+        this.getNavigateTree();
     }
 
     ngOnDestroy(): void {
         this.sub.unsubscribe();
+    }
+
+    /**
+     * Get navigation (to service)
+     */
+    private getNavigateTree(): void {
+        this.subNav = this.crossroadsService.getCrossRoadsTree()
+            .pipe(
+                takeUntil(this.unSubscribe)
+            )
+            .subscribe((tree: InterfaceTree[]) => this._tree = tree);
     }
 }
