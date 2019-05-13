@@ -13,10 +13,11 @@ export interface Crossroads {
   visible: boolean;
   active: boolean;
   hidden: boolean;
+  focus: boolean;
   meta: {
     control: string,
     light: string;
-  },
+  };
   position: {
     coordinates: InterfaceCoordinates,
     type: string;

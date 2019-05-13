@@ -1,6 +1,4 @@
-<ng-container *ngIf="!map">Map</ng-container>
-<h2>{{zoom}}</h2>
-<ul *ngIf="true">
+<ul *ngIf="false">
     <li *ngFor="let point of map"
         [class.visible]="point.visible"
         [class.active]="point.active"
@@ -8,8 +6,7 @@
         (click)="filterDetail(point)"
         class="item-test">{{point.name}}</li>
 </ul>
-
-<ng-container *ngIf="map && false">
+<ng-container *ngIf="map">
     <mat-radio-group class="map-filter" aria-label="Select an option">
         <mat-radio-button
                 *ngFor="let style of stylesMap"
@@ -27,7 +24,7 @@
                     [lngLat]="[point.position.coordinates[0], point.position.coordinates[1]]">
       <span class="item pulsating-circle"
             [class.visible]="point.visible"
-            [class.active]="point.active"
+            [class.focus]="point.focus"
             [ngClass]="point.systemStatus"
             (click)="filterDetail(point)"></span>
             </mgl-marker>

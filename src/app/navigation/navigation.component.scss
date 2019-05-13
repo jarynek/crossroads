@@ -10,7 +10,18 @@
 
     .section {
       cursor: pointer;
+      position: relative;
       padding: 10px 0;
+
+      ul {
+        display: none;
+      }
+
+      &.open {
+        ul {
+          display: block;
+        }
+      }
 
       &.active {
         & > .header {
@@ -61,11 +72,19 @@
           content: '';
           width: 20px;
           height: 20px;
-          background: red;
+          background: gray;
           display: block;
           left: 0;
           top:-1px;
         }
+      }
+
+      .opener {
+        position: absolute;
+        right: 0;
+        font-size: 30px;
+        margin: auto;
+        top: 4px;
       }
     }
 

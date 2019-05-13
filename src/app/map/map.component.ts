@@ -57,7 +57,10 @@ export class MapComponent implements OnInit, OnDestroy {
             .pipe(
                 takeUntil(this.unSubscribe)
             )
-            .subscribe((zoom: number) => this.zoom = zoom);
+            .subscribe((zoom: number) => {
+              this.zoom = zoom;
+              console.log(this.zoom);
+            });
     }
 
     /***
@@ -98,6 +101,6 @@ export class MapComponent implements OnInit, OnDestroy {
     public filterDetail(point): void {
         this.crossroadsService.setCrossRoadsDetail(point);
         this.filterNavigate(point);
-        this.map.filter((item: InterfaceCrossroads) => item.active = item.id === point.id);
+        this.map.filter((item: InterfaceCrossroads) => item.focus = item.id === point.id);
     }
 }
