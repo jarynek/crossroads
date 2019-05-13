@@ -1,5 +1,6 @@
 <ng-container *ngIf="!map">Map</ng-container>
-<ul *ngIf="false">
+<h2>{{zoom}}</h2>
+<ul *ngIf="true">
     <li *ngFor="let point of map"
         [class.visible]="point.visible"
         [class.active]="point.active"
@@ -8,7 +9,7 @@
         class="item-test">{{point.name}}</li>
 </ul>
 
-<ng-container *ngIf="map">
+<ng-container *ngIf="map && false">
     <mat-radio-group class="map-filter" aria-label="Select an option">
         <mat-radio-button
                 *ngFor="let style of stylesMap"
@@ -17,7 +18,7 @@
     </mat-radio-group>
     <mgl-map *ngIf="map"
              [style]="'mapbox://styles/mapbox/' + styleMap + '-v9'"
-             [zoom]="[14]"
+             [zoom]="[zoom]"
              [center]="coordinates"
     >
         <ng-container *ngFor="let point of map">

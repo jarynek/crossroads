@@ -4,88 +4,103 @@ import {Crossroads as InterfaceCrossroads} from './crossroads';
 import {NavigationTree as InterfaceTree} from './navigation-tree';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class CrossroadsService {
 
-  public crossRoads: BehaviorSubject<InterfaceCrossroads[]> = new BehaviorSubject(null);
-  public crossRoadsMap: BehaviorSubject<InterfaceCrossroads[]> = new BehaviorSubject(null);
-  public crossRoadsTree: BehaviorSubject<InterfaceTree[]> = new BehaviorSubject(null);
-  public crossRoadsDetail: BehaviorSubject<InterfaceCrossroads> = new BehaviorSubject(null);
-  public crossRoadsCoordinates: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([19.0580278, 52.65725]);
+    public crossRoads: BehaviorSubject<InterfaceCrossroads[]> = new BehaviorSubject(null);
+    public crossRoadsMap: BehaviorSubject<InterfaceCrossroads[]> = new BehaviorSubject(null);
+    public crossRoadsTree: BehaviorSubject<InterfaceTree[]> = new BehaviorSubject(null);
+    public crossRoadsDetail: BehaviorSubject<InterfaceCrossroads> = new BehaviorSubject(null);
+    public crossRoadsCoordinates: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([19.0580278, 52.65725]);
+    public crossRoadsZoom: BehaviorSubject<number> = new BehaviorSubject(5);
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  /**
-   * Set cross rest api data
-   */
-  public setCrossRoads(value): void {
-    this.crossRoads.next(value);
-  }
+    /**
+     * Set cross rest api data
+     */
+    public setCrossRoads(value): void {
+        this.crossRoads.next(value);
+    }
 
-  /**
-   * Get cross rest api data
-   */
-  public getCrossRoads(): Observable<InterfaceCrossroads[]> {
-    return this.crossRoads;
-  }
+    /**
+     * Get cross rest api data
+     */
+    public getCrossRoads(): Observable<InterfaceCrossroads[]> {
+        return this.crossRoads;
+    }
 
-  /**
-   * Set map data
-   */
-  public setCrossRoadsMap(value): void {
-    this.crossRoadsMap.next(value);
-  }
+    /**
+     * Set map data
+     */
+    public setCrossRoadsMap(value): void {
+        this.crossRoadsMap.next(value);
+    }
 
-  /**
-   * Get map data
-   */
-  public getCrossRoadsMap(): Observable<InterfaceCrossroads[]> {
-    return this.crossRoadsMap;
-  }
+    /**
+     * Get map data
+     */
+    public getCrossRoadsMap(): Observable<InterfaceCrossroads[]> {
+        return this.crossRoadsMap;
+    }
 
-  /**
-   * Set detail
-   */
-  public setCrossRoadsDetail(value): void {
-    this.crossRoadsDetail.next(value);
-  }
+    /**
+     * Set detail
+     */
+    public setCrossRoadsDetail(value): void {
+        this.crossRoadsDetail.next(value);
+    }
 
-  /**
-   * Get detail
-   */
-  public getCrossRoadsDetail(): Observable<InterfaceCrossroads> {
-    return this.crossRoadsDetail;
-  }
-
-
-  /**
-   * Get map tree
-   */
-  public getCrossRoadsTree(): Observable<InterfaceTree[]> {
-    return this.crossRoadsTree;
-  }
-
-  /**
-   * Set map tree
-   */
-  public setCrossRoadsTree(value): void {
-    this.crossRoadsTree.next(value);
-  }
-
-  /**
-   * Set cross roadsCoordinates
-   */
-  public setCrossRoadsCoordinates(value): void {
-    this.crossRoadsCoordinates.next(value);
-  }
+    /**
+     * Get detail
+     */
+    public getCrossRoadsDetail(): Observable<InterfaceCrossroads> {
+        return this.crossRoadsDetail;
+    }
 
 
-  /**
-   * Get cross roadsCoordinates
-   */
-  public getCrossRoadsCoordinates(): Observable<number[]> {
-    return this.crossRoadsCoordinates;
-  }
+    /**
+     * Get map tree
+     */
+    public getCrossRoadsTree(): Observable<InterfaceTree[]> {
+        return this.crossRoadsTree;
+    }
+
+    /**
+     * Set map tree
+     */
+    public setCrossRoadsTree(value): void {
+        this.crossRoadsTree.next(value);
+    }
+
+    /**
+     * Set cross roadsCoordinates
+     */
+    public setCrossRoadsCoordinates(value): void {
+        this.crossRoadsCoordinates.next(value);
+    }
+
+
+    /**
+     * Get cross roadsCoordinates
+     */
+    public getCrossRoadsCoordinates(): Observable<number[]> {
+        return this.crossRoadsCoordinates;
+    }
+
+    /**
+     * Set zoom
+     */
+    public setCrossRoadsZoom(value: number): void {
+        this.crossRoadsZoom.next(value);
+    }
+
+    /**
+     * Get zoom
+     */
+    public getCrossRoadsZoom(): Observable<number> {
+        return this.crossRoadsZoom;
+    }
 }

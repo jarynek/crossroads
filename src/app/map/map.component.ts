@@ -11,10 +11,11 @@ import {map, takeUntil} from 'rxjs/operators';
 })
 export class MapComponent implements OnInit, OnDestroy {
 
-    public map: InterfaceCrossroads[];
     private _navigate: InterfaceCrossroads[];
+    public map: InterfaceCrossroads[];
     public coordinates;
     public styleMap = 'basic';
+    public zoom: number;
     private stylesMap = ['basic', 'streets', 'bright', 'light', 'dark', 'satellite'];
     private sub: Subscription;
     private unSubscribe: Subject<string> = new Subject();
@@ -26,6 +27,7 @@ export class MapComponent implements OnInit, OnDestroy {
         this.getMap();
         this.getNavigate();
         this.setCoordinates();
+        this.getZoom();
     }
 
     ngOnDestroy(): void {
@@ -48,6 +50,14 @@ export class MapComponent implements OnInit, OnDestroy {
             .subscribe((response: InterfaceCrossroads[]) => {
                 this.map = response;
             });
+    }
+
+    private getZoom(): void {
+        this.crossroadsService.getCrossRoadsZoom()
+            .pipe(
+                takeUntil(this.unSubscribe)
+            )
+            .subscribe((zoom: number) => this.zoom = zoom);
     }
 
     /***
