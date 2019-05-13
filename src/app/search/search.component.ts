@@ -25,6 +25,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.getNavigate();
         this.getMap();
+
+        this.crossroadsService.getCrossRoadsTree().subscribe(value => console.log(value));
     }
 
     ngOnDestroy(): void {

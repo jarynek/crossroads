@@ -1,15 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CrossroadsService} from '../crossroads.service';
 import {Crossroads as InterfaceCrossroads} from '../crossroads';
+import {NavigationTree as InterfaceTree} from '../navigation-tree';
 import {takeUntil, map} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
-
-interface InterfaceNavigationStatus {
-    title: string;
-    slug: string;
-    active: boolean;
-    items: InterfaceCrossroads[];
-}
 
 @Component({
     selector: 'app-navigation',
@@ -19,7 +13,7 @@ interface InterfaceNavigationStatus {
 export class NavigationComponent implements OnInit, OnDestroy {
 
     public navigation: InterfaceCrossroads[];
-    public navigationTree: InterfaceNavigationStatus[] = [
+    public navigationTree: InterfaceTree[] = [
         {
             title: 'Ok',
             slug: 'ok',
@@ -53,7 +47,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.setNavigation();
-        this.navigationTree.map((nav: InterfaceNavigationStatus) => {
+        this.navigationTree.map((nav: InterfaceTree) => {
             nav.items = [];
         });
     }
@@ -108,12 +102,14 @@ export class NavigationComponent implements OnInit, OnDestroy {
         response.map((item: InterfaceCrossroads) => {
             item.active = false;
             item.hidden = false;
-            this.navigationTree.filter((nav: InterfaceNavigationStatus) => {
+            this.navigationTree.filter((nav: InterfaceTree) => {
                 if (nav.slug === item.systemStatus) {
                     nav.items.push(item);
                 }
             });
         });
+
+        this.crossroadsService.setCrossRoadsTree(this.navigationTree);
     }
 
     /**
@@ -131,7 +127,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
             nav.active = false;
             nav.hidden = false;
         });
-        this.navigationTree.map((section: InterfaceNavigationStatus) => section.active = false);
+        this.navigationTree.map((section: InterfaceTree) => section.active = false);
     }
 
     /**

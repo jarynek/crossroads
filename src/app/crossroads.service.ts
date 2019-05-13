@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Crossroads as InterfaceCrossroads} from './crossroads';
+import {NavigationTree as InterfaceTree} from './navigation-tree';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class CrossroadsService {
 
   public crossRoads: BehaviorSubject<InterfaceCrossroads[]> = new BehaviorSubject(null);
   public crossRoadsMap: BehaviorSubject<InterfaceCrossroads[]> = new BehaviorSubject(null);
+  public crossRoadsTree: BehaviorSubject<InterfaceTree[]> = new BehaviorSubject(null);
   public crossRoadsDetail: BehaviorSubject<InterfaceCrossroads> = new BehaviorSubject(null);
   public crossRoadsCoordinates: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([19.0580278, 52.65725]);
 
@@ -55,6 +57,21 @@ export class CrossroadsService {
    */
   public getCrossRoadsDetail(): Observable<InterfaceCrossroads> {
     return this.crossRoadsDetail;
+  }
+
+
+  /**
+   * Get map tree
+   */
+  public getCrossRoadsTree(): Observable<InterfaceTree[]> {
+    return this.crossRoadsTree;
+  }
+
+  /**
+   * Set map tree
+   */
+  public setCrossRoadsTree(value): void {
+    this.crossRoadsTree.next(value);
   }
 
   /**
