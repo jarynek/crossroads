@@ -7,7 +7,7 @@
         class="item-test">{{point.name}}</li>
 </ul>
 <ng-container *ngIf="map">
-    <mat-radio-group class="map-filter" aria-label="Select an option">
+    <mat-radio-group class="map-filter" cdkDrag aria-label="Select an option">
         <mat-radio-button
                 *ngFor="let style of stylesMap"
                 [value]="style"

@@ -165,10 +165,14 @@ export class NavigationComponent implements OnInit, OnDestroy {
    */
   public collapseFilter(): void {
     this.navigationTree.filter((tree: InterfaceTree) => tree.open = false);
+    this.collapseInit = false;
   }
 
+  /**
+   * Collapse stet init
+   * @param value: boolean
+   */
   public collapseSetInit(value: boolean) {
-    console.log(value);
     this.collapseInit = value;
   }
 }

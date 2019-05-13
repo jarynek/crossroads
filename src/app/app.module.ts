@@ -14,6 +14,7 @@ import {MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule, MatRa
 import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
 import {SearchComponent} from './search/search.component';
 import {ToggleSectionDirective} from './toggle-section.directive';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {ToggleSectionDirective} from './toggle-section.directive';
     MatInputModule,
     MatIconModule,
     MatRadioModule,
+    DragDropModule,
     NgxMapboxGLModule.withConfig({
       accessToken: 'pk.eyJ1Ijoibm92bzMyIiwiYSI6ImNpcnJneWFncTAwZDRocW0xbXc1bms4enkifQ.LPu4CnsewasKfUdARljoSw',
       geocoderAccessToken: 'pk.eyJ1Ijoibm92bzMyIiwiYSI6ImNpcnJneWFncTAwZDRocW0xbXc1bms4enkifQ.LPu4CnsewasKfUdARljoSw'
