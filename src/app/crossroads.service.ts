@@ -84,7 +84,6 @@ export class CrossroadsService {
     this.crossRoadsCoordinates.next(value);
   }
 
-
   /**
    * Get cross roadsCoordinates
    */
@@ -105,7 +104,6 @@ export class CrossroadsService {
   public getCrossRoadsZoom(): Observable<number> {
     return this.crossRoadsZoom;
   }
-
 
   /**
    * Set zooming
@@ -142,8 +140,25 @@ export class CrossroadsService {
       throw new Error('not type number');
     }
 
-    console.log(arg);
-
     this.setCrossRoadsCoordinates(arg);
+  }
+
+  /**
+   * Reset map
+   * @param args: InterfaceCrossroads[]
+   */
+  public resetMap(args: InterfaceCrossroads[]): void {
+
+    if (!args) {
+      throw new Error('not arg for resetMap');
+    }
+
+    args.map((item: InterfaceCrossroads) => {
+      item.focus = false;
+      item.active = false;
+      item.visible = true;
+    });
+
+    this.setCrossRoadsMap(args);
   }
 }

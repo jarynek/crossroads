@@ -14,6 +14,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
     public detail: InterfaceCrossroads;
     private _tree: InterfaceTree[];
+    private _map: InterfaceCrossroads[];
     private unSubscribe: Subject<string> = new Subject();
     private subNav: Subscription;
     private sub: Subscription;
@@ -28,10 +29,10 @@ export class DetailComponent implements OnInit, OnDestroy {
             )
             .subscribe((response: InterfaceCrossroads) => {
                 this.detail = response;
-                console.log(this.detail);
             });
 
         this.getNavigateTree();
+        this.getMap();
     }
 
     ngOnDestroy(): void {
@@ -48,4 +49,23 @@ export class DetailComponent implements OnInit, OnDestroy {
             )
             .subscribe((tree: InterfaceTree[]) => this._tree = tree);
     }
+
+    /**
+     * Get map
+     */
+    private getMap(): void {
+        this.subNav = this.crossroadsService.getCrossRoadsMap()
+          .pipe(
+            takeUntil(this.unSubscribe)
+          )
+          .subscribe((response: InterfaceCrossroads[]) => this._map = response);
+      }
+
+    /**
+     * Reset detail
+     */
+    public resetDetail(): void {
+        this.crossroadsService.resetDetail();
+        this.crossroadsService.resetMap(this._map);
+      }
 }

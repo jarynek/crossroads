@@ -1,11 +1,3 @@
-<ul *ngIf="false">
-    <li *ngFor="let point of map"
-        [class.visible]="point.visible"
-        [class.active]="point.active"
-        [ngClass]="point.systemStatus"
-        (click)="filterDetail(point)"
-        class="item-test">{{point.name}}</li>
-</ul>
 <ng-container *ngIf="map">
     <mat-radio-group class="map-filter" cdkDrag aria-label="Select an option">
         <mat-radio-button

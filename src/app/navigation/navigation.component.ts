@@ -16,14 +16,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
   public navigation: InterfaceCrossroads[];
   public navigationTree: InterfaceTree[] = CrossRoadsConfig.navigationTree;
   public collapseInit = false;
+  private _map: InterfaceCrossroads[];
   private unSubscribe: Subject<string> = new Subject();
   private sub: Subscription;
+  private subNav: Subscription;
 
   constructor(private crossroadsService: CrossroadsService) {
   }
 
   ngOnInit() {
     this.setNavigation();
+    this.getMap();
     this.navigationTree.map((nav: InterfaceTree) => {
       nav.items = [];
     });
@@ -31,6 +34,17 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+  }
+
+  /**
+   * Get map
+   */
+  private getMap(): void {
+    this.subNav = this.crossroadsService.getCrossRoadsMap()
+      .pipe(
+        takeUntil(this.unSubscribe)
+      )
+      .subscribe((response: InterfaceCrossroads[]) => this._map = response);
   }
 
   /**
@@ -44,16 +58,9 @@ export class NavigationComponent implements OnInit, OnDestroy {
       throw new Error('ids id not object');
     }
 
-    this.crossroadsService.getCrossRoadsMap()
-      .pipe(
-        map((response: InterfaceCrossroads[]) => {
-          response.filter((mapItem: InterfaceCrossroads) => {
-            mapItem.visible = ids.includes(mapItem.id);
-          });
-          return response;
-        })
-      )
-      .subscribe();
+    this._map.filter((mapItem: InterfaceCrossroads) => {
+      mapItem.visible = ids.includes(mapItem.id);
+    });
   }
 
   /**

@@ -39,10 +39,12 @@ export class MapComponent implements OnInit, OnDestroy {
     private getMap(): void {
         this.crossroadsService.getCrossRoadsMap()
             .pipe(
-                takeUntil(this.unSubscribe),
                 map((response: InterfaceCrossroads[]) => {
                     if (response) {
-                        response.map((item: InterfaceCrossroads) => item.visible = true);
+                        response.map((item: InterfaceCrossroads) => {
+                          item.visible = true;
+                          console.log(item.visible);
+                        });
                         return response;
                     }
                 })

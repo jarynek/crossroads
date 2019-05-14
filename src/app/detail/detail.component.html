@@ -1,7 +1,6 @@
 <ng-container *ngIf="detail">
+  <span class="material-icons reset" (click)="resetDetail()">clear</span>
   <h2>{{detail.name}}</h2>
-  <label class="label" [ngClass]="detail.systemStatus">{{detail.systemStatus}}</label>
-
   <div class="row">
     <div class="section">Name</div>
     <div class="section right">{{detail.name}}</div>
@@ -30,19 +29,4 @@
     <div class="section">Serial number</div>
     <div class="section right">unknown</div>
   </div>
-
-  <form action="">
-    <mat-form-field>
-      <mat-label>Status</mat-label>
-      <mat-select [(ngModel)]="detail.systemStatus"
-                  name="status"
-                  [(value)]="detail.systemStatus">
-        <mat-option value="ok">Ok</mat-option>
-        <mat-option value="warning">Warning</mat-option>
-        <mat-option value="error">Error</mat-option>
-        <mat-option value="disconnected">Discontected</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-  </form>
 </ng-container>

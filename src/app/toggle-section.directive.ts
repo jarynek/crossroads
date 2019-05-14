@@ -8,6 +8,7 @@ import {takeUntil} from 'rxjs/operators';
 @Directive({
   selector: '[appToggleSection]'
 })
+
 export class ToggleSectionDirective implements OnInit {
 
   private _navigateTree: InterfaceTree[];

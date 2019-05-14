@@ -22,6 +22,7 @@ import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
 import {SearchComponent} from './search/search.component';
 import {ToggleSectionDirective} from './toggle-section.directive';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { SortBySectionPipe } from './sort-by-section.pipe';
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         MapComponent,
         DetailComponent,
         SearchComponent,
-        ToggleSectionDirective
+        ToggleSectionDirective,
+        SortBySectionPipe
     ],
     imports: [
         BrowserModule,

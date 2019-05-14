@@ -53,6 +53,10 @@
         }
       }
 
+      &.blue {
+        color: #5087c2;
+      }
+
       &.ok {
         .header {
           &:before {
@@ -109,6 +113,16 @@
             &:before {
               background-color: #b81d8f;
             }
+          }
+        }
+      }
+
+      &.empty {
+        .header {
+          padding-left: 0;
+
+          &:before {
+            display: none;
           }
         }
       }

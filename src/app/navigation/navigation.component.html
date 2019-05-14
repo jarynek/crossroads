@@ -1,7 +1,7 @@
 <app-search></app-search>
 <ul *ngIf="navigationTree" class="navigation">
-  <li *ngIf="collapseInit" (click)="collapseFilter()">Collapse all</li>
-  <li class="section"><span class="header" (click)="resetFilter()">All</span></li>
+  <li *ngIf="collapseInit" class="section blue" (click)="collapseFilter()">Collapse all</li>
+  <li class="section empty"><span class="header" (click)="resetFilter()">All</span></li>
   <li *ngFor="let section of navigationTree"
       class="section"
       [ngClass]="section.slug"
@@ -23,8 +23,4 @@
       </li>
     </ul>
   </li>
-</ul>
-
-<ul>
-  <li *ngFor="let item of navigation">{{item.name}} {{item.systemStatus}}</li>
 </ul>
