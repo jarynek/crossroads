@@ -3,10 +3,13 @@ interface InterfaceCoordinates {
 }
 
 export interface Crossroads {
-  id: number;
+  id: string;
+  connectorId: string;
   name: string;
+  class: string;
   type: string;
   producer: string;
+  model: string;
   managementUrl: string;
   operatingStatus: string;
   systemStatus: string;

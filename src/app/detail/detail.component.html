@@ -1,19 +1,48 @@
-<form action="" *ngIf="detail">
+<ng-container *ngIf="detail">
   <h2>{{detail.name}}</h2>
+  <label class="label" [ngClass]="detail.systemStatus">{{detail.systemStatus}}</label>
 
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Name" name="name" [value]="detail.name" [(ngModel)]="detail.name">
-  </mat-form-field>
+  <div class="row">
+    <div class="section">Name</div>
+    <div class="section right">{{detail.name}}</div>
+  </div>
+  <div class="row">
+    <div class="section">Category</div>
+    <div class="section right">{{detail.class}}</div>
+  </div>
+  <div class="row">
+    <div class="section">Status</div>
+    <div class="section right"><span class="circle" [ngClass]="detail.systemStatus"></span>{{detail.systemStatus}} 4months</div>
+  </div>
+  <div class="row">
+    <div class="section">Address</div>
+    <div class="section right">unknown</div>
+  </div>
+  <div class="row">
+    <div class="section">Producer</div>
+    <div class="section">{{detail.producer}}</div>
+  </div>
+  <div class="row">
+    <div class="section">Model</div>
+    <div class="section right">{{detail.model}}</div>
+  </div>
+  <div class="row">
+    <div class="section">Serial number</div>
+    <div class="section right">unknown</div>
+  </div>
 
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="OperatingStatus" name="operatingStatus" [value]="detail.operatingStatus" [(ngModel)]="detail.operatingStatus">
-  </mat-form-field>
+  <form action="">
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="detail.systemStatus"
+                  name="status"
+                  [(value)]="detail.systemStatus">
+        <mat-option value="ok">Ok</mat-option>
+        <mat-option value="warning">Warning</mat-option>
+        <mat-option value="error">Error</mat-option>
+        <mat-option value="disconnected">Discontected</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Coordinates 0" name="coordinates_0" [value]="detail.position.coordinates[0]" [(ngModel)]="detail.position.coordinates[0]">
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Coordinates 1" name="coordinates_1" [value]="detail.position.coordinates[1]" [(ngModel)]="detail.position.coordinates[1]">
-  </mat-form-field>
-</form>
+  </form>
+</ng-container>
