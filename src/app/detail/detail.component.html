@@ -1,25 +1,48 @@
 <ng-container *ngIf="detail">
   <h2>{{detail.name}}</h2>
   <label class="label" [ngClass]="detail.systemStatus">{{detail.systemStatus}}</label>
+
+  <div class="row">
+    <div class="section">Name</div>
+    <div class="section right">{{detail.name}}</div>
+  </div>
+  <div class="row">
+    <div class="section">Category</div>
+    <div class="section right">{{detail.class}}</div>
+  </div>
+  <div class="row">
+    <div class="section">Status</div>
+    <div class="section right"><span class="circle" [ngClass]="detail.systemStatus"></span>{{detail.systemStatus}} 4months</div>
+  </div>
+  <div class="row">
+    <div class="section">Address</div>
+    <div class="section right">unknown</div>
+  </div>
+  <div class="row">
+    <div class="section">Producer</div>
+    <div class="section">{{detail.producer}}</div>
+  </div>
+  <div class="row">
+    <div class="section">Model</div>
+    <div class="section right">{{detail.model}}</div>
+  </div>
+  <div class="row">
+    <div class="section">Serial number</div>
+    <div class="section right">unknown</div>
+  </div>
+
   <form action="">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Name" name="name" [value]="detail.name" [(ngModel)]="detail.name">
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="detail.systemStatus"
+                  name="status"
+                  [(value)]="detail.systemStatus">
+        <mat-option value="ok">Ok</mat-option>
+        <mat-option value="warning">Warning</mat-option>
+        <mat-option value="error">Error</mat-option>
+        <mat-option value="disconnected">Discontected</mat-option>
+      </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Status" name="status" [value]="detail.systemStatus">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Producer" name="producer" [value]="detail.producer" [(ngModel)]="detail.producer">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Model" name="model" [value]="detail.model">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Serial number" name="connectorId" [value]="detail.id">
-    </mat-form-field>
   </form>
 </ng-container>

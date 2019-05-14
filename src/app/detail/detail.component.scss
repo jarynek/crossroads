@@ -30,4 +30,46 @@
   .mat-form-field {
     display: block;
   }
+
+  .row {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    .section {
+      flex: 1;
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+  .row + .row {
+    border-top: solid 1px #dcdcdc;
+  }
+
+  .circle {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    position: relative;
+    top: 4px;
+    display: inline-block;
+    background: gray;
+    border-radius: 16px;
+
+    &.ok {
+      background: #44d115;
+    }
+
+    &.warning {
+      background: #ffae00;
+    }
+
+    &.error {
+      background: #f20000;
+    }
+
+    &.disconnected {
+      background: #b81d8f;
+    }
+  }
 }

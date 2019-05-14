@@ -6,6 +6,7 @@ export interface Crossroads {
   id: string;
   connectorId: string;
   name: string;
+  class: string;
   type: string;
   producer: string;
   model: string;

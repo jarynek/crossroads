@@ -26,7 +26,10 @@ export class DetailComponent implements OnInit, OnDestroy {
             .pipe(
                 takeUntil(this.unSubscribe)
             )
-            .subscribe((response: InterfaceCrossroads) => this.detail = response);
+            .subscribe((response: InterfaceCrossroads) => {
+                this.detail = response;
+                console.log(this.detail);
+            });
 
         this.getNavigateTree();
     }
