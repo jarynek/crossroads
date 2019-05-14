@@ -20,6 +20,7 @@ import {
 } from '@angular/material';
 import {NgxMapboxGLModule} from 'ngx-mapbox-gl';
 import {SearchComponent} from './search/search.component';
+import {ToggleSectionDirective} from './toggle-section.directive';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
@@ -29,7 +30,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         NavigationComponent,
         MapComponent,
         DetailComponent,
-        SearchComponent
+        SearchComponent,
+        ToggleSectionDirective
     ],
     imports: [
         BrowserModule,
