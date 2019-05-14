@@ -1,4 +1,9 @@
 <ng-container *ngIf="map">
+
+    <div class="legends">
+        <span *ngFor="let item of legend" class="legend" [ngClass]="item.slug">{{item.title}}</span>
+    </div>
+
     <mat-radio-group class="map-filter" cdkDrag aria-label="Select an option">
         <mat-radio-button
                 *ngFor="let style of stylesMap"

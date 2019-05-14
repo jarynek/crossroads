@@ -117,7 +117,6 @@ export class CrossroadsService {
       throw new Error('not type number');
     }
 
-    console.log(mapboxgl);
     this.setCrossRoadsZoom(arg);
   }
 

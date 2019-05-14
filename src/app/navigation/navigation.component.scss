@@ -3,6 +3,7 @@
 
     list-style: none;
     padding: 0;
+    margin: 0;
 
     ul {
       list-style: none;
@@ -14,20 +15,20 @@
       padding: 10px 0;
 
       ul {
-        padding: 0 10px 0 20px;
+        padding: 0 10px 0 26px;
         display: none;
         li {
           padding: 4px 0 4px 24px;
           position: relative;
           &:before {
             content: '';
-            height: 20px;
-            width: 20px;
+            height: 18px;
+            width: 18px;
             background-image: url("../../assets/images/icon-cctv1.png");
             background-color: #5087c2;
             background-position: center;
             background-repeat: no-repeat;
-            background-size: 70%;
+            background-size: 80%;
             display: block;
             position: absolute;
             left: 0;
@@ -129,7 +130,7 @@
 
       .header {
         position: relative;
-        padding-left: 24px;
+        padding-left: 28px;
         display: inline-block;
 
         &:before {

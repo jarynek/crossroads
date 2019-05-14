@@ -13,7 +13,7 @@
           appToggleSection
           (updateCollapseInit)="collapseSetInit($event)"
           [section]="section">{{section.open ? 'arrow_drop_down' : 'arrow_right'}}</span>
-    <ul *ngIf="section.items">
+    <ul *ngIf="section.items.length > 0">
       <li *ngFor="let item of section.items"
           class="item"
           (click)="filterNavigation(item)"

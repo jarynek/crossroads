@@ -1,5 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {CrossRoadsConfig} from '../internal';
 import {Crossroads as InterfaceCrossroads} from '../crossroads';
+import {NavigationTree as InterfaceTree} from '../navigation-tree';
 import {CrossroadsService} from '../crossroads.service';
 import {Subject, Subscription} from 'rxjs';
 import {map, takeUntil} from 'rxjs/operators';
@@ -13,6 +15,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
     private _navigate: InterfaceCrossroads[];
     public map: InterfaceCrossroads[];
+    public legend: InterfaceTree[] = CrossRoadsConfig.navigationTree;
     public coordinates;
     public styleMap = 'basic';
     public zoom: number;
@@ -42,8 +45,8 @@ export class MapComponent implements OnInit, OnDestroy {
                 map((response: InterfaceCrossroads[]) => {
                     if (response) {
                         response.map((item: InterfaceCrossroads) => {
-                          item.visible = true;
-                          console.log(item.visible);
+                            item.visible = true;
+                            console.log(item.visible);
                         });
                         return response;
                     }
@@ -60,8 +63,8 @@ export class MapComponent implements OnInit, OnDestroy {
                 takeUntil(this.unSubscribe)
             )
             .subscribe((zoom: number) => {
-              this.zoom = zoom;
-              console.log(this.zoom);
+                this.zoom = zoom;
+                console.log(this.zoom);
             });
     }
 
