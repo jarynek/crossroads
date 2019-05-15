@@ -123,6 +123,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
      */
     public filterNavigation(item): void {
 
+        const coordinates: string[] = !item.position.coordinates
+            ? CrossRoadsConfig.map.coordinates
+            : item.position.coordinates;
+
         let ids = [];
 
         if (item.items && item.items.length > 0) {
@@ -146,8 +150,8 @@ export class NavigationComponent implements OnInit, OnDestroy {
         }
 
         this.crossroadsService.setCrossRoadsDetail(null);
-        if (item.position) {
-            this.crossroadsService.setCrossRoadsCoordinates(item.position.coordinates);
+        if (coordinates) {
+            this.crossroadsService.setCrossRoadsCoordinates(coordinates);
         }
     }
 

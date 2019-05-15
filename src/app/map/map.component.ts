@@ -46,7 +46,6 @@ export class MapComponent implements OnInit, OnDestroy {
                     if (response) {
                         response.map((item: InterfaceCrossroads) => {
                             item.visible = true;
-                            console.log(item.visible);
                         });
                         return response;
                     }
@@ -64,7 +63,6 @@ export class MapComponent implements OnInit, OnDestroy {
             )
             .subscribe((zoom: number) => {
                 this.zoom = zoom;
-                console.log(this.zoom);
             });
     }
 
