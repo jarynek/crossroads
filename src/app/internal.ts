@@ -5,32 +5,36 @@ export const CrossRoadsConfig = {
   },
   navigationTree: [
     {
-      title: 'Ok',
-      slug: 'ok',
-      active: false,
-      open: false,
-      items: []
-    },
-    {
       title: 'Disconnected',
       slug: 'disconnected',
       active: false,
       open: false,
-      items: []
-    },
-    {
-      title: 'Warning',
-      slug: 'warning',
-      open: false,
-      active: false,
-      items: []
+      items: [],
+      count: null
     },
     {
       title: 'Error',
       slug: 'error',
       active: false,
       open: false,
-      items: []
+      items: [],
+      count: null
+    },
+    {
+      title: 'Warning',
+      slug: 'warning',
+      open: false,
+      active: false,
+      items: [],
+      count: null
+    },
+    {
+      title: 'Ok',
+      slug: 'ok',
+      active: false,
+      open: false,
+      items: [],
+      count: null
     }
   ]
 };

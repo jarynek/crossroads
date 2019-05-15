@@ -1,4 +1,4 @@
-<app-search></app-search>
+<app-search [collapseInit]="collapseInit" (collapseInitUpdate)="collapseInitUpdate($event)"></app-search>
 <ul *ngIf="navigationTree" class="navigation">
   <li *ngIf="collapseInit" class="section blue" (click)="collapseFilter()">Collapse all</li>
   <li class="section empty"><span class="header" (click)="resetFilter()">All</span></li>
@@ -7,7 +7,7 @@
       [ngClass]="section.slug"
       [class.active]="section.active"
       [class.open]="section.open">
-    <span class="header" (click)="filterNavigation(section)">{{section.title}} ({{section.items.length}})</span>
+    <span class="header" (click)="filterNavigation(section)">{{section.title}} ({{section.count !== null ? section.count : section.items.length}})</span>
     <span *ngIf="section.items.length > 0"
           class="material-icons opener"
           appToggleSection
@@ -17,9 +17,10 @@
       <li *ngFor="let item of section.items"
           class="item"
           (click)="filterNavigation(item)"
+          [class.disable]="!item.position"
           [class.active]="item.active"
           [class.hidden]="item.hidden">
-        <span>{{item.name}}</span>
+        <span>{{item.name}}</span> <span class="label-small" *ngIf="!item.position">(Not position)</span>
       </li>
     </ul>
   </li>

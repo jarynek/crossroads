@@ -2,12 +2,10 @@
   display: flex;
   height: 100%;
   overflow: hidden;
-  border-top: solid 1px #dcdcdc;
-  border-bottom: solid 1px #dcdcdc;
 
   .navigation {
     padding: 16px;
-    width: 200px;
+    width: 300px;
     max-width: 300px;
     border-right: solid 1px #dcdcdc;
     overflow-y: auto;
@@ -19,7 +17,7 @@
 
   .detail {
     padding: 16px;
-    width: 260px;
+    width: 300px;
     max-width: 300px;
     border-left: solid 1px #dcdcdc;
   }

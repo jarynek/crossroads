@@ -34,6 +34,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.sub.unsubscribe();
     }
 
     /**
@@ -70,7 +71,11 @@ export class MapComponent implements OnInit, OnDestroy {
      * Set coordinates
      */
     private setCoordinates() {
-        this.crossroadsService.getCrossRoadsCoordinates().subscribe((response) => this.coordinates = response);
+        this.crossroadsService.getCrossRoadsCoordinates()
+            .pipe(
+                takeUntil(this.unSubscribe)
+            )
+            .subscribe((response) => this.coordinates = response);
     }
 
     /**

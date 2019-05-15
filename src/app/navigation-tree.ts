@@ -6,4 +6,5 @@ export interface NavigationTree {
     active: boolean;
     open: boolean;
     items: InterfaceRoads[];
+    count: number;
 }

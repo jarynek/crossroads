@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Crossroads as InterfaceCrossroads} from '../crossroads';
 import {NavigationTree as InterfaceTree} from '../navigation-tree';
 import {CrossroadsService} from '../crossroads.service';
+import {CrossRoadsConfig} from '../internal';
 import {Subject, Subscription} from 'rxjs';
 import {takeUntil, map} from 'rxjs/operators';
 
@@ -67,5 +68,6 @@ export class DetailComponent implements OnInit, OnDestroy {
     public resetDetail(): void {
         this.crossroadsService.resetDetail();
         this.crossroadsService.resetMap(this._map);
+        this.crossroadsService.setCrossRoadsCoordinates(CrossRoadsConfig.map.coordinates);
       }
 }

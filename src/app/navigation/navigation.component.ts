@@ -3,7 +3,7 @@ import {CrossRoadsConfig} from '../internal';
 import {CrossroadsService} from '../crossroads.service';
 import {Crossroads as InterfaceCrossroads} from '../crossroads';
 import {NavigationTree as InterfaceTree} from '../navigation-tree';
-import {takeUntil, map} from 'rxjs/operators';
+import {takeUntil} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
 
 @Component({
@@ -159,16 +159,13 @@ export class NavigationComponent implements OnInit, OnDestroy {
      * Reset filter
      */
     public resetFilter(): void {
-        this.crossroadsService.getCrossRoadsMap()
-            .pipe(
-                map((response: InterfaceCrossroads[]) => {
-                    response.map((mapItem: InterfaceCrossroads) => mapItem.visible = true);
-                })
-            )
-            .subscribe();
+
+        this.collapseInit = true;
 
         try {
             this.resetNavigation('navigation');
+            this.crossroadsService.resetMap(this._map);
+            this.crossroadsService.resetTree(this.navigationTree);
             this.crossroadsService.setCoordinates(CrossRoadsConfig.map.coordinates);
         } catch (e) {
             console.log(e.message);
@@ -179,7 +176,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
      * Collapse filter
      */
     public collapseFilter(): void {
-        this.navigationTree.filter((tree: InterfaceTree) => tree.open = false);
+        this.navigationTree.map((tree: InterfaceTree) => tree.open = false);
         this.collapseInit = false;
     }
 
@@ -188,6 +185,14 @@ export class NavigationComponent implements OnInit, OnDestroy {
      * @param value: boolean
      */
     public collapseSetInit(value: boolean) {
+        this.collapseInit = value;
+    }
+
+    /**
+     * Collapse init from search
+     * @param value: any
+     */
+    private collapseInitUpdate(value: any) {
         this.collapseInit = value;
     }
 }
