@@ -123,7 +123,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
      */
     public filterNavigation(item): void {
 
-        const coordinates: string[] = !item.position.coordinates
+        const coordinates: string[] = !item.position
             ? CrossRoadsConfig.map.coordinates
             : item.position.coordinates;
 

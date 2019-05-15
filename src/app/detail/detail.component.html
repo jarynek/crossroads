@@ -2,31 +2,31 @@
   <span class="material-icons reset" (click)="resetDetail()">clear</span>
   <h2>{{detail.name}}</h2>
   <div class="row">
-    <div class="section">Name</div>
+    <div class="section gray">Name</div>
     <div class="section right">{{detail.name}}</div>
   </div>
   <div class="row">
-    <div class="section">Category</div>
+    <div class="section gray">Category</div>
     <div class="section right">{{detail.class}}</div>
   </div>
   <div class="row">
-    <div class="section">Status</div>
-    <div class="section right"><span class="circle" [ngClass]="detail.systemStatus"></span>{{detail.systemStatus}} 4months</div>
+    <div class="section gray">Status</div>
+    <div class="section right"><span class="circle" [ngClass]="detail.systemStatus"></span>{{detail.systemStatus}} <span class="gray">4 months</span></div>
   </div>
   <div class="row">
-    <div class="section">Address</div>
-    <div class="section right">unknown</div>
+    <div class="section gray">Address</div>
+    <div class="section right gray">unknown</div>
   </div>
   <div class="row">
-    <div class="section">Producer</div>
+    <div class="section gray">Producer</div>
     <div class="section">{{detail.producer}}</div>
   </div>
   <div class="row">
-    <div class="section">Model</div>
+    <div class="section gray">Model</div>
     <div class="section right">{{detail.model}}</div>
   </div>
   <div class="row">
-    <div class="section">Serial number</div>
-    <div class="section right">unknown</div>
+    <div class="section gray">Serial number</div>
+    <div class="section right gray">unknown</div>
   </div>
 </ng-container>

@@ -1,4 +1,8 @@
+@import "../scss/mixins";
+
 :host {
+  position: relative;
+
   h2 {
     margin-top: 10px;
     margin-bottom: 0;
@@ -25,6 +29,10 @@
     &.disconnected {
       background-color: #b81d8f;
     }
+  }
+
+  .gray {
+    color: $gray;
   }
 
   .mat-form-field {
@@ -71,5 +79,12 @@
     &.disconnected {
       background: #b81d8f;
     }
+  }
+
+  .reset {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 24px;
   }
 }

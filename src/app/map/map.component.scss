@@ -1,3 +1,5 @@
+@import "../scss/mixins";
+
 :host {
 
   position: relative;
@@ -41,11 +43,11 @@
     &.ok {
       &.pulsating-circle {
         &:before {
-          background-color: #44d115;
+          background-color: $green;
         }
 
         &:after {
-          background-color: #44d115;
+          background-color: $green;
         }
       }
     }
@@ -53,11 +55,11 @@
     &.warning {
       &.pulsating-circle {
         &:before {
-          background-color: #ffae00;
+          background-color: $orange;
         }
 
         &:after {
-          background-color: #ffae00;
+          background-color: $orange;
         }
       }
     }
@@ -65,11 +67,11 @@
     &.error {
       &.pulsating-circle {
         &:before {
-          background-color: #f20000;
+          background-color: $red;
         }
 
         &:after {
-          background-color: #f20000;
+          background-color: $red;
         }
       }
     }
@@ -77,11 +79,11 @@
     &.disconnected {
       &.pulsating-circle {
         &:before {
-          background-color: #963d94;
+          background-color: $violet;
         }
 
         &:after {
-          background-color: #963d94;
+          background-color: $violet;
         }
       }
     }
@@ -134,6 +136,60 @@
     border: solid #c1bfbf 1px;
     border-radius: 4px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.24);
+  }
+
+  .legends {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: #fff;
+    display: flex;
+    z-index: 1;
+    padding: 8px 16px;
+
+    .legend {
+      font-size: 14px;
+      position: relative;
+      padding: 2px 20px 2px 16px;
+
+      &:last-child {
+        padding-right: 0;
+      }
+
+      &:before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        border-radius: 12px;
+        background: $red;
+        position: absolute;
+        left: 0;
+        top: 4px;
+      }
+
+      &.disconnected {
+        &:before {
+          background: $violet;
+        }
+      }
+
+      &.warning {
+        &:before {
+          background: $orange;
+        }
+      }
+
+      &.error {
+        &:before {
+          background: $red;
+        }
+      }
+      &.ok {
+        &:before {
+          background: $green;
+        }
+      }
+    }
   }
 
   mgl-map {
@@ -194,60 +250,6 @@
 
     &.disconnected {
       color: #b81d8f;
-    }
-  }
-
-  .legends {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background: #fff;
-    display: flex;
-    z-index: 1;
-    padding: 8px 16px;
-
-    .legend {
-      font-size: 14px;
-      position: relative;
-      padding: 2px 20px 2px 16px;
-
-      &:last-child {
-        padding-right: 0;
-      }
-
-      &:before {
-        content: '';
-        width: 12px;
-        height: 12px;
-        border-radius: 12px;
-        background: red;
-        position: absolute;
-        left: 0;
-        top: 4px;
-      }
-
-      &.disconnected {
-        &:before {
-          background: #963d94;
-        }
-      }
-
-      &.warning {
-        &:before {
-          background: #ffae00;
-        }
-      }
-
-      &.error {
-        &:before {
-          background: #f20000;
-        }
-      }
-      &.ok {
-        &:before {
-          background: #44d115;
-        }
-      }
     }
   }
 }
