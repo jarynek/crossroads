@@ -30,9 +30,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-
-        console.log(this.collapseInit);
-
         try {
             this.getNavigate();
             this.getTree();
